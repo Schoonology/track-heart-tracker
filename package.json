@@ -1,0 +1,23 @@
+{
+  "name": "track-heart-tracker",
+  "version": "0.1.0",
+  "description": "Tracks the affinity between 🎧 and the 🎙 they 💚.",
+  "main": "bin/server",
+  "scripts": {
+    "start": "node bin/server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Schoonmaker <schoon@testdouble.com> (https://www.schoonology.com/)",
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Schoonology/track-heart-tracker.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Schoonology/track-heart-tracker/issues"
+  },
+  "homepage": "https://github.com/Schoonology/track-heart-tracker#readme"
+}
