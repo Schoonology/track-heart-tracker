@@ -1,1 +1,35 @@
 #!/usr/bin/env node
+var express = require('express')
+var oja = require('open-json-api')
+var openapi = require('../lib/openapi')
+var UsersController = require('../lib/controllers/users')
+var app = express()
+
+app.use(openapi({
+  spec: require('../spec'),
+  controllers: {
+    users: new UsersController()
+  }
+}))
+
+app.use((err, req, res, next) => {
+  var status = err.status || (res.statusCode >= 400 ? res.statusCode : null) || 500
+  res
+    .status(status)
+    .send({
+      status: status,
+      code: err.code,
+      detail: err.message,
+      meta: {
+        errors: err.results.errors
+      }
+    })
+})
+
+if (require.main === module) {
+  app.listen(8080, () => {
+    console.log('Listening on 8080...')
+  })
+}
+
+module.exports = app

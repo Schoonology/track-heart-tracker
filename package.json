@@ -4,13 +4,26 @@
   "description": "Tracks the affinity between 🎧 and the 🎙 they 💚.",
   "main": "bin/server",
   "scripts": {
+    "lint": "standard --fix",
     "start": "node bin/server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava --timeout=1s",
+    "watch": "nodemon -w bin/server -w lib -w spec -x 'npm run lint && npm run start'"
   },
   "author": "Michael Schoonmaker <schoon@testdouble.com> (https://www.schoonology.com/)",
   "license": "GPL-3.0",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.3",
+    "open-json-api": "github:schoonology/open-json-api",
+    "swagger-tools": "^0.10.1"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "nodemon": "^1.11.0",
+    "obcheckt": "^0.1.6",
+    "standard": "^10.0.2",
+    "supertest": "^3.0.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Schoonology/track-heart-tracker.git"
