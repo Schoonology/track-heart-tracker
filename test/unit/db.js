@@ -47,6 +47,14 @@ test('create new', t => {
   t.pass()
 })
 
+test('create new does not mutate', t => {
+  var value = createValue()
+
+  db.table('test').create(value)
+
+  t.is(value.id, undefined)
+})
+
 test('create existing', t => {
   var value = db.table('test').create(createValue())
 
