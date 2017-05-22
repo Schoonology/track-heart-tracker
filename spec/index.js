@@ -7,6 +7,168 @@ var spec = {
     version: require('../package.json').version
   },
   paths: {
+    '/tracks': {
+      'x-swagger-router-controller': 'tracks',
+      post: {
+        operationId: 'create',
+        parameters: [
+          {
+            name: 'body',
+            in: 'body',
+            required: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['data'],
+              properties: {
+                data: {
+                  allOf: [{
+                    $ref: '#/definitions/Track'
+                  }, {
+                    type: 'object',
+                    properties: {
+                      attributes: {
+                        type: 'object',
+                        required: ['artist', 'title']
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          }
+        ],
+        responses: {
+          201: {
+            description: 'Successful response.',
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                data: {
+                  $ref: '#/definitions/Track'
+                },
+                included: {
+                  type: 'array',
+                  items: {
+                    type: 'object'
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    '/tracks/{trackId}': {
+      'x-swagger-router-controller': 'tracks',
+      get: {
+        operationId: 'read',
+        parameters: [
+          {
+            name: 'trackId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Successful response.',
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                data: {
+                  $ref: '#/definitions/Track'
+                },
+                included: {
+                  type: 'array',
+                  items: {
+                    type: 'object'
+                  }
+                }
+              }
+            }
+          },
+          404: {
+            description: 'Failed to find the requested Track.',
+            schema: {}
+          }
+        }
+      },
+      put: {
+        operationId: 'update',
+        parameters: [
+          {
+            name: 'trackId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          },
+          {
+            name: 'body',
+            in: 'body',
+            required: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['data'],
+              properties: {
+                data: {
+                  $ref: '#/definitions/Track'
+                }
+              }
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Successful response.',
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                data: {
+                  $ref: '#/definitions/Track'
+                },
+                included: {
+                  type: 'array',
+                  items: {
+                    type: 'object'
+                  }
+                }
+              }
+            }
+          },
+          404: {
+            description: 'Failed to find the requested Track.',
+            schema: {}
+          }
+        }
+      },
+      delete: {
+        operationId: 'delete',
+        parameters: [
+          {
+            name: 'trackId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          }
+        ],
+        responses: {
+          204: {
+            description: 'Successful response.',
+            schema: {}
+          },
+          404: {
+            description: 'Failed to find the requested Track.',
+            schema: {}
+          }
+        }
+      }
+    },
     '/users': {
       'x-swagger-router-controller': 'users',
       post: {
@@ -171,6 +333,24 @@ var spec = {
     }
   }
 }
+
+spec = oja.defineResource(spec, 'Track', {
+  type: 'tracks',
+  attributes: {
+    artist: {
+      type: 'string',
+      maxLength: 127
+    },
+    album: {
+      type: 'string',
+      maxLength: 255
+    },
+    title: {
+      type: 'string',
+      maxLength: 255
+    }
+  }
+})
 
 spec = oja.defineResource(spec, 'User', {
   type: 'users',
