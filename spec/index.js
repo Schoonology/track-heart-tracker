@@ -59,6 +59,115 @@ var spec = {
           }
         }
       }
+    },
+    '/users/{userId}': {
+      'x-swagger-router-controller': 'users',
+      get: {
+        operationId: 'read',
+        parameters: [
+          {
+            name: 'userId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Successful response.',
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                data: {
+                  $ref: '#/definitions/User'
+                },
+                included: {
+                  type: 'array',
+                  items: {
+                    type: 'object'
+                  }
+                }
+              }
+            }
+          },
+          404: {
+            description: 'Failed to find the requested User.',
+            schema: {}
+          }
+        }
+      },
+      put: {
+        operationId: 'update',
+        parameters: [
+          {
+            name: 'userId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          },
+          {
+            name: 'body',
+            in: 'body',
+            required: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['data'],
+              properties: {
+                data: {
+                  $ref: '#/definitions/User'
+                }
+              }
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Successful response.',
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                data: {
+                  $ref: '#/definitions/User'
+                },
+                included: {
+                  type: 'array',
+                  items: {
+                    type: 'object'
+                  }
+                }
+              }
+            }
+          },
+          404: {
+            description: 'Failed to find the requested User.',
+            schema: {}
+          }
+        }
+      },
+      delete: {
+        operationId: 'delete',
+        parameters: [
+          {
+            name: 'userId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          }
+        ],
+        responses: {
+          204: {
+            description: 'Successful response.',
+            schema: {}
+          },
+          404: {
+            description: 'Failed to find the requested User.',
+            schema: {}
+          }
+        }
+      }
     }
   }
 }

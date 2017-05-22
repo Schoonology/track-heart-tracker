@@ -5,6 +5,11 @@ var openapi = require('../lib/openapi')
 var UsersController = require('../lib/controllers/users')
 var app = express()
 
+app.use((req, res, next) => {
+  res.set('Content-Type', 'application/vnd.api+json')
+  next()
+})
+
 app.use(openapi({
   spec: require('../spec'),
   controllers: {
@@ -20,7 +25,7 @@ app.use((err, req, res, next) => {
       status: status,
       code: err.code,
       detail: err.message,
-      meta: {
+      meta: err.results && {
         errors: err.results.errors
       }
     })

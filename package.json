@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "standard --fix",
     "start": "node bin/server",
-    "test": "ava --timeout=1s",
+    "test": "ava --timeout=5s",
     "watch": "nodemon -w bin/server -w lib -w spec -x 'npm run lint && npm run start'"
   },
   "author": "Michael Schoonmaker <schoon@testdouble.com> (https://www.schoonology.com/)",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "ava": "^0.19.1",
+    "faker": "^4.1.0",
     "nodemon": "^1.11.0",
     "obcheckt": "^0.1.6",
     "standard": "^10.0.2",
