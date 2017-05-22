@@ -103,6 +103,21 @@ test.cb('create track validation: missing title', t => {
     .end(t.end)
 })
 
+test.cb('create track validation: extra field', t => {
+  var trackData = generateTrackData()
+  var trackBody = oja.normalize(spec, 'Track', trackData)
+
+  trackBody.attributes.extra = true
+
+  supertest(app)
+    .post('/tracks')
+    .send({
+      data: trackBody
+    })
+    .expect(400)
+    .end(t.end)
+})
+
 test.cb('fetch track', t => {
   var trackData = generateTrackData()
   var trackId = saveTrack(trackData).id
@@ -147,6 +162,23 @@ test.cb('update track', t => {
         attributes: newTrackData
       }
     }))
+    .end(t.end)
+})
+
+test.cb('update track validation: extra field', t => {
+  var oldTrackData = generateTrackData()
+  var newTrackData = generateTrackData()
+  var trackId = saveTrack(oldTrackData).id
+  var trackBody = oja.normalize(spec, 'Track', newTrackData)
+
+  trackBody.attributes.extra = true
+
+  supertest(app)
+    .put('/tracks/' + trackId)
+    .send({
+      data: trackBody
+    })
+    .expect(400)
     .end(t.end)
 })
 

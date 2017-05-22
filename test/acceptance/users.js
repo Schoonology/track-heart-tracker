@@ -80,6 +80,21 @@ test.cb('create user validation: missing email', t => {
     .end(t.end)
 })
 
+test.cb('create user validation: extra field', t => {
+  var userData = generateUserData()
+  var userBody = oja.normalize(spec, 'User', userData)
+
+  userBody.attributes.extra = true
+
+  supertest(app)
+    .post('/users')
+    .send({
+      data: userBody
+    })
+    .expect(400)
+    .end(t.end)
+})
+
 test.cb('fetch user', t => {
   var userData = generateUserData()
   var userId = saveUser(userData).id
@@ -124,6 +139,23 @@ test.cb('update user', t => {
         attributes: newUserData
       }
     }))
+    .end(t.end)
+})
+
+test.cb('update user validation: extra field', t => {
+  var oldUserData = generateUserData()
+  var newUserData = generateUserData()
+  var userId = saveUser(oldUserData).id
+  var userBody = oja.normalize(spec, 'User', newUserData)
+
+  userBody.extra = true
+
+  supertest(app)
+    .put('/users/' + userId)
+    .send({
+      data: userBody
+    })
+    .expect(400)
     .end(t.end)
 })
 
