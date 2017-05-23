@@ -168,6 +168,29 @@ test.cb('update user\'s jam', t => {
     .end(t.end)
 })
 
+test.cb('update user\'s jam (specific route)', t => {
+  var userData = generateUserData()
+  var userId = saveUser(userData).id
+
+  supertest(app)
+    .patch('/users/' + userId + '/relationships/jam')
+    .send({
+      data: {
+        type: 'tracks',
+        id: '42'
+      }
+    })
+    .expect(200)
+    .expect('Content-Type', /application\/vnd\.api\+json/)
+    .expect(match({
+      data: {
+        type: 'tracks',
+        id: '42'
+      }
+    }))
+    .end(t.end)
+})
+
 test.cb('update user validation: extra field', t => {
   var oldUserData = generateUserData()
   var newUserData = generateUserData()

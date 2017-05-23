@@ -363,6 +363,50 @@ var spec = {
           }
         }
       }
+    },
+    '/users/{userId}/relationships/jam': {
+      'x-swagger-router-controller': 'users',
+      patch: {
+        operationId: 'updateJam',
+        tags: ['Users'],
+        parameters: [
+          {
+            name: 'userId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          },
+          {
+            name: 'jam',
+            in: 'body',
+            required: true,
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              required: ['data'],
+              properties: {
+                data: {
+                  $ref: '#/definitions/TrackIdentifier'
+                }
+              }
+            }
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Successful response.',
+            schema: {
+              type: 'object',
+              additionalProperties: false,
+              properties: {
+                data: {
+                  $ref: '#/definitions/TrackIdentifier'
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
