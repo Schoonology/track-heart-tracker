@@ -1242,8 +1242,8 @@ es-to-primitive@^1.1.1:
     is-symbol "^1.0.1"
 
 es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14:
-  version "0.10.20"
-  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.20.tgz#72a9b4fd5832797ba1bb65dceb2e25c04241c492"
+  version "0.10.21"
+  resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.21.tgz#19a725f9e51d0300bbc1e8e821109fd9daf55925"
   dependencies:
     es6-iterator "2"
     es6-symbol "~3.1"
@@ -3168,8 +3168,8 @@ onetime@^2.0.0:
     mimic-fn "^1.0.0"
 
 "open-json-api@github:schoonology/open-json-api":
-  version "0.1.1"
-  resolved "https://codeload.github.com/schoonology/open-json-api/tar.gz/8446a36ce52d84e4d89f3fad729ba6882f8d97d3"
+  version "0.2.0"
+  resolved "https://codeload.github.com/schoonology/open-json-api/tar.gz/5d65a3be30ebd9573c5286537fae49534f379097"
 
 option-chain@^0.1.0:
   version "0.1.1"
