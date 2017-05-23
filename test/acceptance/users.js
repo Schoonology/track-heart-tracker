@@ -126,7 +126,7 @@ test.cb('update user', t => {
   var userId = saveUser(oldUserData).id
 
   supertest(app)
-    .put('/users/' + userId)
+    .patch('/users/' + userId)
     .send({
       data: oja.normalize(spec, 'User', newUserData)
     })
@@ -147,7 +147,7 @@ test.cb('update user\'s jam', t => {
   var userId = saveUser(userData).id
 
   supertest(app)
-    .put('/users/' + userId)
+    .patch('/users/' + userId)
     .send({
       data: oja.normalize(spec, 'User', {
         jam: {
@@ -177,7 +177,7 @@ test.cb('update user validation: extra field', t => {
   userBody.extra = true
 
   supertest(app)
-    .put('/users/' + userId)
+    .patch('/users/' + userId)
     .send({
       data: userBody
     })
@@ -189,7 +189,7 @@ test.cb('update missing', t => {
   var newUserData = generateUserData()
 
   supertest(app)
-    .put('/users/1234')
+    .patch('/users/1234')
     .send({
       data: oja.normalize(spec, 'User', newUserData)
     })

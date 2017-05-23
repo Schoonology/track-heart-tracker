@@ -149,7 +149,7 @@ test.cb('update track', t => {
   var trackId = saveTrack(oldTrackData).id
 
   supertest(app)
-    .put('/tracks/' + trackId)
+    .patch('/tracks/' + trackId)
     .send({
       data: oja.normalize(spec, 'Track', newTrackData)
     })
@@ -174,7 +174,7 @@ test.cb('update track validation: extra field', t => {
   trackBody.attributes.extra = true
 
   supertest(app)
-    .put('/tracks/' + trackId)
+    .patch('/tracks/' + trackId)
     .send({
       data: trackBody
     })
@@ -186,7 +186,7 @@ test.cb('update missing', t => {
   var newTrackData = generateTrackData()
 
   supertest(app)
-    .put('/tracks/1234')
+    .patch('/tracks/1234')
     .send({
       data: oja.normalize(spec, 'Track', newTrackData)
     })
@@ -199,7 +199,7 @@ test.cb('update track\'s spotify link', t => {
   var trackId = saveTrack(userData).id
 
   supertest(app)
-    .put('/tracks/' + trackId)
+    .patch('/tracks/' + trackId)
     .send({
       data: oja.normalize(spec, 'Track', {
         links: {

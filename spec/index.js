@@ -104,7 +104,7 @@ var spec = {
           }
         }
       },
-      put: {
+      patch: {
         operationId: 'update',
         tags: ['Tracks'],
         parameters: [
@@ -270,7 +270,7 @@ var spec = {
           }
         }
       },
-      put: {
+      patch: {
         operationId: 'update',
         tags: ['Users'],
         parameters: [
