@@ -362,7 +362,8 @@ spec = oja.defineResource(spec, 'Track', {
       type: 'string',
       maxLength: 255
     }
-  }
+  },
+  links: ['spotify']
 })
 
 spec = oja.defineResource(spec, 'User', {

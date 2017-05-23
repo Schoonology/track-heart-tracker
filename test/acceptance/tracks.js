@@ -194,6 +194,34 @@ test.cb('update missing', t => {
     .end(t.end)
 })
 
+test.cb('update track\'s spotify link', t => {
+  var userData = generateTrackData()
+  var trackId = saveTrack(userData).id
+
+  supertest(app)
+    .put('/tracks/' + trackId)
+    .send({
+      data: oja.normalize(spec, 'Track', {
+        links: {
+          spotify: 'test-spotify-url'
+        }
+      })
+    })
+    .expect(200)
+    .expect('Content-Type', /application\/vnd\.api\+json/)
+    .expect(match({
+      data: {
+        id: String,
+        type: 'tracks',
+        attributes: userData,
+        links: {
+          spotify: 'test-spotify-url'
+        }
+      }
+    }))
+    .end(t.end)
+})
+
 test.cb('delete track', t => {
   var trackData = generateTrackData()
   var trackId = saveTrack(trackData).id
