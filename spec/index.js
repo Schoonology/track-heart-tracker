@@ -343,6 +343,26 @@ var spec = {
           }
         }
       }
+    },
+    '/users/{userId}/playJam': {
+      'x-swagger-router-controller': 'users',
+      get: {
+        operationId: 'goToJam',
+        tags: ['Users'],
+        parameters: [
+          {
+            name: 'userId',
+            in: 'path',
+            required: true,
+            type: 'string'
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Failed to find the requested User.'
+          }
+        }
+      }
     }
   }
 }
