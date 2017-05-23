@@ -142,6 +142,32 @@ test.cb('update user', t => {
     .end(t.end)
 })
 
+test.cb('update user\'s jam', t => {
+  var userData = generateUserData()
+  var userId = saveUser(userData).id
+
+  supertest(app)
+    .put('/users/' + userId)
+    .send({
+      data: oja.normalize(spec, 'User', {
+        jam: {
+          type: 'tracks',
+          id: '42'
+        }
+      })
+    })
+    .expect(200)
+    .expect('Content-Type', /application\/vnd\.api\+json/)
+    .expect(match({
+      data: {
+        id: String,
+        type: 'users',
+        attributes: userData
+      }
+    }))
+    .end(t.end)
+})
+
 test.cb('update user validation: extra field', t => {
   var oldUserData = generateUserData()
   var newUserData = generateUserData()

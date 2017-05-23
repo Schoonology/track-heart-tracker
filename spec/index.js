@@ -364,6 +364,9 @@ spec = oja.defineResource(spec, 'User', {
       format: 'email',
       maxLength: 255
     }
+  },
+  relationships: {
+    jam: 'Track'
   }
 })
 
