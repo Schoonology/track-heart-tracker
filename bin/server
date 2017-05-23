@@ -11,6 +11,11 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/documentation', (req, res, next) => {
+  res.set('Content-Type', null)
+  next()
+})
+
 app.use(openapi({
   spec: require('../spec'),
   controllers: {

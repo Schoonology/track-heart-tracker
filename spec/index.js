@@ -6,11 +6,17 @@ var spec = {
     title: require('../package.json').name,
     version: require('../package.json').version
   },
+  tags: [{
+    name: 'Tracks'
+  }, {
+    name: 'Users'
+  }],
   paths: {
     '/tracks': {
       'x-swagger-router-controller': 'tracks',
       post: {
         operationId: 'create',
+        tags: ['Tracks'],
         parameters: [
           {
             name: 'body',
@@ -64,6 +70,7 @@ var spec = {
       'x-swagger-router-controller': 'tracks',
       get: {
         operationId: 'read',
+        tags: ['Tracks'],
         parameters: [
           {
             name: 'trackId',
@@ -99,6 +106,7 @@ var spec = {
       },
       put: {
         operationId: 'update',
+        tags: ['Tracks'],
         parameters: [
           {
             name: 'trackId',
@@ -149,6 +157,7 @@ var spec = {
       },
       delete: {
         operationId: 'delete',
+        tags: ['Tracks'],
         parameters: [
           {
             name: 'trackId',
@@ -173,6 +182,7 @@ var spec = {
       'x-swagger-router-controller': 'users',
       post: {
         operationId: 'create',
+        tags: ['Users'],
         parameters: [
           {
             name: 'body',
@@ -226,6 +236,7 @@ var spec = {
       'x-swagger-router-controller': 'users',
       get: {
         operationId: 'read',
+        tags: ['Users'],
         parameters: [
           {
             name: 'userId',
@@ -261,6 +272,7 @@ var spec = {
       },
       put: {
         operationId: 'update',
+        tags: ['Users'],
         parameters: [
           {
             name: 'userId',
@@ -311,6 +323,7 @@ var spec = {
       },
       delete: {
         operationId: 'delete',
+        tags: ['Users'],
         parameters: [
           {
             name: 'userId',
