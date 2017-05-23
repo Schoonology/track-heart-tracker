@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.3",
+    "lodash": "^4.17.4",
     "open-json-api": "github:schoonology/open-json-api",
     "swagger-tools": "^0.10.1"
   },

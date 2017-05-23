@@ -93,6 +93,27 @@ test('update partial', t => {
   t.is(db.table('test').fetch(oldValue.id)['new-key'], 'new-value')
 })
 
+test('update partial deep', t => {
+  var oldValue = db.table('test').create(createValue())
+
+  db.table('test').update(oldValue.id, { 'new-key': {
+    first: 42
+  }})
+
+  t.is(db.table('test').fetch(oldValue.id).key, 'value')
+  t.deepEqual(db.table('test').fetch(oldValue.id)['new-key'], { first: 42 })
+
+  db.table('test').update(oldValue.id, { 'new-key': {
+    second: 23
+  }})
+
+  t.is(db.table('test').fetch(oldValue.id).key, 'value')
+  t.deepEqual(db.table('test').fetch(oldValue.id)['new-key'], {
+    first: 42,
+    second: 23
+  })
+})
+
 test('update missing', t => {
   t.throws(() => {
     db.table('test').update(createId(), createValue())
